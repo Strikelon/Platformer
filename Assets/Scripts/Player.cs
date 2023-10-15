@@ -14,10 +14,14 @@ public class Player : MonoBehaviour
     [SerializeField] private Vector3 _groundBoxSize;
     [SerializeField] private float _maxGroundDistance;
     [SerializeField] private LayerMask _groundLayerMask;
+    [SerializeField] private LayerMask _enemyLayerMask;
+    [SerializeField] private float _baseHealth = 100;
+    [SerializeField] private float _damage = 10;
 
     private Rigidbody2D _rigidBody2D;
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
+    private float _currentHealth;
 
     private AnimatorStates _animatorState
     {
@@ -30,6 +34,7 @@ public class Player : MonoBehaviour
         _rigidBody2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
+        _currentHealth = _baseHealth;
     }
 
     private void Update()
@@ -78,10 +83,34 @@ public class Player : MonoBehaviour
         {
             return true;
         }
+        else if(Physics2D.BoxCast(transform.position, _groundBoxSize, 0, -transform.up, _maxGroundDistance, _enemyLayerMask))
+        {
+            return true;
+        }
         else
         {
             return false;
         }
+    }
+
+    public void GetDamage(float damage)
+    {
+        _currentHealth -= damage;
+        Debug.Log($"Player health = {_currentHealth}");
+        if (_currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public float GiveDamage()
+    {
+        return _damage;
+    }
+
+    public void RecoverHealth()
+    {
+        _currentHealth = _baseHealth;
     }
 }
 
