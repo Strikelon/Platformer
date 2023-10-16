@@ -8,12 +8,12 @@ public class Spawner : MonoBehaviour
     [SerializeField] private LayerMask _restrictedLayer;
     [SerializeField] private float _restrictedRadius;
 
-    void Start()
+    private void Start()
     {
         SpawnResources();
     }
 
-    void SpawnResources()
+    private void SpawnResources()
     {
         for (int i = 0; i < _resourceCount; i++)
         {
@@ -43,7 +43,7 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    Vector2 GetRandomPositionInsideArea()
+    private Vector2 GetRandomPositionInsideArea()
     {
         Bounds rectangleBounds = _spawnArea.GetComponent<Renderer>().bounds;
         Vector2 randomPoint = new Vector2(

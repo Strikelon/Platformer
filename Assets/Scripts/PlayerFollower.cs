@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class PlayerFollower: MonoBehaviour
 {
     [SerializeField] private Transform _player;
 
