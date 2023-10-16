@@ -1,9 +1,8 @@
 using UnityEngine;
-using UnityEngine.Events;
 
-public class CollectDetection : MonoBehaviour
+public class Resource : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent<Player>(out Player player))
         {
